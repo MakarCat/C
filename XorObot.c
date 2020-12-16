@@ -48,7 +48,7 @@ int main()
     int i, j, r, a, yes, pt_x, pt_y; 
     int x, y; //Выбор игрока
     char myArray[3][3]; //Поле
-    int xoro = 0; //Кто сейчас ходит
+    int xoro = 0; //Кто сейчас ходит. 0 - это Х, 1 - это О
     int hd = 0; //Сколько ходов прошёл бот
     
     for ( i = 0; i < 3; i++ ) { //Заполняем поле
@@ -75,8 +75,6 @@ int main()
                             printf("123_");
                         }
                     }
-                    if (yes == 1) {break;}
-                }
                 }
                 if (yes == 1) { break; }
                 r = 0;
