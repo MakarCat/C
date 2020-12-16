@@ -77,21 +77,21 @@ int main()
                     }
                 }
                 if (yes == 1) { break; }
+
                 r = 0;
                 a = 0;
                 for ( j = 0; j < 3; j++ ) {
                     if (myArray[j][i] == 'x') { r++; }
-                    if (myArray[j][i] == 'o') { a++; }
-                    if (r == 2 && a == 0) {
-                        for ( j = 0; j < 3; j++ ) {
-                            if (myArray[j][i] == '_') {
-                                y = j+1;
-                                x = i+1;
-                                yes = 1;
-                                printf("123_");
-                            }
+                    if (myArray[j][i] == 'o') { a++; } 
+                }
+                if (r == 2 && a == 0) {
+                    for ( j = 0; j < 3; j++ ) {
+                        if (myArray[j][i] == '_') {
+                            y = j+1;
+                            x = i+1;
+                            yes = 1;
+                            printf("123_");
                         }
-                        if (yes == 1) {break;}
                     }
                 }
                 if (yes == 1) { break; }
@@ -103,16 +103,15 @@ int main()
                     for ( j = 0; j < 3; j++ ) {
                         if (myArray[i][j] == 'x') { r++; }
                         if (myArray[i][j] == 'o') { a++; }
-                        if (a == 2 && r == 0) {
-                            for ( j = 0; j < 3; j++ ) {
-                                if (myArray[i][j] == '_') {
-                                    y = i+1;
-                                    x = j+1;
-                                    yes = 1;
-                                    printf("123o_");
-                                }
+                    }
+                    if (a == 2 && r == 0) {
+                        for ( j = 0; j < 3; j++ ) {
+                            if (myArray[i][j] == '_') {
+                                y = i+1;
+                                x = j+1;
+                                yes = 1;
+                                printf("123o_");
                             }
-                            if (yes == 1) {break;}
                         }
                     }
                     if (yes == 1) { break; }
@@ -122,16 +121,16 @@ int main()
                     for ( j = 0; j < 3; j++ ) {
                         if (myArray[j][i] == 'x') { r++; }
                         if (myArray[j][i] == 'o') { a++; }
-                        if (a == 2 && r == 0) {
-                            for ( j = 0; j < 3; j++ ) {
-                                if (myArray[j][i] == '_') {
-                                    y = j+1;
-                                    x = i+1;
-                                    yes = 1;
-                                    printf("123o_");
-                                }
+                        
+                    }
+                    if (a == 2 && r == 0) {
+                        for ( j = 0; j < 3; j++ ) {
+                            if (myArray[j][i] == '_') {
+                                y = j+1;
+                                x = i+1;
+                                yes = 1;
+                                printf("123o_");
                             }
-                            if (yes == 1) {break;}
                         }
                     }
                     if (yes == 1) { break; }
@@ -210,7 +209,7 @@ int main()
             printf("%d draw\n", draw(myArray));
             if (yes == 0 && hd > 2) {
                 if (draw(myArray) == 1) {
-                    printf("Ничья!");
+                    printf("Ничья!\n");
                     exit(1);
                 }
             }
