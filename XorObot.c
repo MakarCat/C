@@ -52,29 +52,31 @@ int main()
     int hd = 0; //Сколько ходов прошёл бот
     
     for ( i = 0; i < 3; i++ ) { //Заполняем поле
-        for ( j = 0; j < 3; j++ )
-        myArray[i][j] = '_';
+        for ( j = 0; j < 3; j++ ) { 
+            myArray[i][j] = '_'; 
+        }
     }
 
     while (1) {
-        if (xoro == 0) { //Ставим крестик или нолик
+        if (xoro == 0) { //Если сейчас ходит Х
             for ( i = 0; i < 3; i++ ) {
                 r = 0;
                 a = 0;
                 for ( j = 0; j < 3; j++ ) {
                     if (myArray[i][j] == 'x') { r++; }
                     if (myArray[i][j] == 'o') { a++; }
-                    if (r == 2 && a == 0) {
-                        for ( j = 0; j < 3; j++ ) {
-                            if (myArray[i][j] == '_') {
-                                y = i+1;
-                                x = j+1;
-                                yes = 1;
-                                printf("123_");
-                            }
+                }
+                if (r == 2 && a == 0) {
+                    for ( j = 0; j < 3; j++ ) {
+                        if (myArray[i][j] == '_') {
+                            y = i+1;
+                            x = j+1;
+                            yes = 1;
+                            printf("123_");
                         }
-                        if (yes == 1) {break;}
                     }
+                    if (yes == 1) {break;}
+                }
                 }
                 if (yes == 1) { break; }
                 r = 0;
