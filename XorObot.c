@@ -59,6 +59,7 @@ int main()
 
     while (1) {
         if (xoro == 0) { //Если сейчас ходит Х
+            yes = 0;
             for ( i = 0; i < 3; i++ ) {
                 r = 0;
                 a = 0;
@@ -168,6 +169,10 @@ int main()
                     x = pt_x;
                     y = pt_y;
                     yes = 1;
+                } else if (r == 0 && a == 2) {
+                    x = pt_x;
+                    y = pt_y;
+                    yes = 1;
                 }
             }
             if (yes == 0) {
@@ -202,19 +207,15 @@ int main()
                     x = pt_x;
                     y = pt_y;
                     yes = 1;
-                }
-            }
-
-            
-            printf("%d draw\n", draw(myArray));
-            if (yes == 0 && hd > 2) {
-                if (draw(myArray) == 1) {
-                    printf("Ничья!\n");
-                    exit(1);
+                } else if (r == 0 && a == 2) {
+                    x = pt_x;
+                    y = pt_y;
+                    yes = 1;
                 }
             }
 
             if (yes == 0) {
+                printf("сюжет\n");
                 if(hd == 0) {
                     y = 3;
                     x = 3;
@@ -269,6 +270,11 @@ int main()
             }
         }
         if (r == 0) {
+            if (xoro == 1) {
+                for ( i = 0; i < 3; i++ ) {
+                    printf("| %c | %c | %c | \n", myArray[i][0], myArray[i][1], myArray[i][2]); //Вывод
+                }
+            }
             printf("Ничья!");
             exit(1);
         }
