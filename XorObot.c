@@ -1,10 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-void check(char xo, char arr[3][3]) 
+void check(char xo, char arr[3][3]) //Проверка на победу
 {
     int i, r, j;
-    for ( i = 0; i < 3; i++ ) {
+    for ( i = 0; i < 3; i++ ) { //Проверка строк
         r = 0;
         for ( j = 0; j < 3; j++ ) {
             if (arr[i][j] == xo) { r++; }
@@ -14,7 +14,7 @@ void check(char xo, char arr[3][3])
             }
         }
     }
-    for ( i = 0; i < 3; i++ ) {
+    for ( i = 0; i < 3; i++ ) { //Проверка столбцов
         r = 0;
         for ( j = 0; j < 3; j++ ) {
             if (arr[j][i] == xo) { r++; }
@@ -24,28 +24,13 @@ void check(char xo, char arr[3][3])
             }
         }
     }
-    if (arr[0][0] == xo && arr[1][1] == xo && arr[2][2] == xo) { printf("Победили %c! \n", xo); exit(1); }
+    if (arr[0][0] == xo && arr[1][1] == xo && arr[2][2] == xo) { printf("Победили %c! \n", xo); exit(1); } //Проверка диагоналей
     if (arr[0][2] == xo && arr[1][1] == xo && arr[2][0] == xo) { printf("Победили %c! \n", xo); exit(1); }
-}
-
-int draw(char arr[3][3]) 
-{
-    int i, r, j, out;
-    for ( i = 0; i < 3; i++ ) {
-        r = 0;
-        for ( j = 0; j < 3; j++ ) {
-            if (arr[i][j] == '_') r++;
-            if (arr[j][i] == '_') r++;
-        }
-    }
-    if (r <= 2) out = 1;
-    if (r > 2) out = 0;
-    return out;
 }
 
 int main()
 {
-    int i, j, r, a, yes, pt_x, pt_y; 
+    int i, j, r, a, yes, pt_x, pt_y, key; 
     int x, y; //Выбор игрока
     char myArray[3][3]; //Поле
     int xoro = 0; //Кто сейчас ходит. 0 - это Х, 1 - это О
@@ -57,10 +42,21 @@ int main()
         }
     }
 
+    printf("Для начала игры - нажмите 1.\nДля того, что бы прочитать правила - нажмите 2.\n");
+
+    while(key != 1) {
+        scanf("%d", &key);
+        if(key == 2) {
+            printf("Игроки по очереди ставят на свободные клетки поля 3х3 знаки (вы играете за нолики. Что бы поставить нолик введите через пробел номер столбца, а потом номер строки).\nПервый, выстроивший в ряд 3 своих фигуры по вертикали, горизонтали или диагонали, выигрывает.\nПервый ход делает игрок, ставящий крестики.");
+        } else if (key != 1) {
+            printf("Для начала игры - нажмите 1.\nДля того, что бы прочитать правила - нажмите 2.\n");
+        }
+    }
+
     while (1) {
         if (xoro == 0) { //Если сейчас ходит Х
             yes = 0;
-            for ( i = 0; i < 3; i++ ) {
+            for ( i = 0; i < 3; i++ ) { //Проверка можно ли поставить крестик так, что бы крестики выйграли
                 r = 0;
                 a = 0;
                 for ( j = 0; j < 3; j++ ) {
@@ -73,7 +69,6 @@ int main()
                             y = i+1;
                             x = j+1;
                             yes = 1;
-                            printf("123_");
                         }
                     }
                 }
@@ -91,13 +86,12 @@ int main()
                             y = j+1;
                             x = i+1;
                             yes = 1;
-                            printf("123_");
                         }
                     }
                 }
                 if (yes == 1) { break; }
             }
-            if (yes == 0) {
+            if (yes == 0) { //Проверка можно ли поставить нолик так, что бы нолики выйграли
                 for ( i = 0; i < 3; i++ ) {
                     r = 0;
                     a = 0;
@@ -111,7 +105,6 @@ int main()
                                 y = i+1;
                                 x = j+1;
                                 yes = 1;
-                                printf("123o_");
                             }
                         }
                     }
@@ -130,15 +123,13 @@ int main()
                                 y = j+1;
                                 x = i+1;
                                 yes = 1;
-                                printf("123o_");
                             }
                         }
                     }
                     if (yes == 1) { break; }
                 }
             }
-            if (yes == 0) {
-                printf("diagonal001122\n");
+            if (yes == 0) { //Проверка диагонали
                 r = 0;
                 a = 0;
                 if (myArray[0][0] == 'x') {
@@ -175,8 +166,7 @@ int main()
                     yes = 1;
                 }
             }
-            if (yes == 0) {
-                printf("diagonal\n");
+            if (yes == 0) { //Проверка диагонали
                 r = 0;
                 a = 0;
                 if (myArray[0][2] == 'x') {
@@ -214,43 +204,37 @@ int main()
                 }
             }
 
-            if (yes == 0) {
-                printf("сюжет\n");
+            if (yes == 0) { //Если мы не можем ничего сделать из вышеперечисленного
                 if(hd == 0) {
                     y = 3;
                     x = 3;
                     hd++;
                 } else if (hd == 1 && myArray[0][2] == '_') {
-                    printf("1 1\n");
                     y = 1;
                     x = 3;
                     hd++;
                 } else if (hd == 1 && myArray[0][2] != '_') {
-                    printf("1 2\n");
                     y = 3;
                     x = 1;
                     hd++;
                 } else if (hd == 2 && myArray[0][0] == '_') {
-                    printf("2 1\n");
                     y = 1;
                     x = 1;
                     hd++;
                 } else if (hd == 2 && myArray[1][1] == '_') {
-                    printf("2 2\n");
                     y = 2;
                     x = 2;
                     hd++;
                 }
             }
             
-            printf("%d\n", yes);
             myArray[y-1][x-1] = 'x';
             xoro = 1;
         } else {
-            scanf("%d %d", &y, &x);
+            scanf("%d %d", &x, &y);
             while (myArray[y-1][x-1] != '_') { //Если там уже есть значение
                 printf("Там уже есть значение! \n");
-                scanf("%d %d", &y, &x);
+                scanf("%d %d", &x, &y);
             }
             myArray[y-1][x-1] = 'o';
             xoro = 0; 
@@ -264,7 +248,7 @@ int main()
         check('x', myArray); //Этап проверки крестиков
         check('o', myArray); //Этап проверки ноликов
         r = 0;
-        for ( i=0; i < 3; i++) {
+        for ( i=0; i < 3; i++) { //Следующие строки проверяют ничью
             for ( j=0; j < 3; j++) {
                 if (myArray[i][j] == '_') r++;
             }
